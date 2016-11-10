@@ -6,6 +6,14 @@ import java.util.concurrent.ForkJoinPool;
 import static java.util.concurrent.ForkJoinTask.invokeAll;
 import java.util.concurrent.RecursiveTask;
 
+
+/**
+ * 
+ * Hacemos lo mismo que en la parte anterior con la diferencia que esta vez 
+ * no quedaran 2 sinó 4 los numeros a comparar
+ * 
+ * @author ALUMNEDAM
+ */
 public class Parte_2 extends RecursiveTask<Double>{
 
         private final double[] array;
@@ -17,6 +25,12 @@ public class Parte_2 extends RecursiveTask<Double>{
             this.finale = fin;
         }
 
+        /**
+         * Al quedar 4 numero se pasa por bucle cada uno de ellos para sumarlos
+         * y despues hacer la media para que una vez se hayan hecho los ForkJoin
+         * éste coja la media mas alta
+         * @return 
+         */
         @Override
         protected Double compute() {
             if (finale - inici <= 4) {
@@ -41,6 +55,14 @@ public class Parte_2 extends RecursiveTask<Double>{
             }
         }
 
+        /**
+         * 
+         * Aqui se declara el array de temperaturas y una vez declarado
+         * HAcemos el forkJOin igual al anterior.
+         * 
+         * 
+         * @param args 
+         */
         public static void main(String[] args) {
 
             double[] temperatures = {

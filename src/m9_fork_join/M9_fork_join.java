@@ -5,6 +5,16 @@ import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * Esta es nuestra clase para el ejercicio 1, en la que necesitamos extender de RecursiveTask
+ * para que se haga bien el fork Join
+ * 
+ * Tenemos las variables de array que irá al constructor de la clase
+ * Las siguientes que se llaman inici y finale nor serviran para comparar los dos
+ * numero finales que quedaran para comparar
+ * Tamanio y parabifurcar simplemente eliminan el hardcode
+ * @author ALUMNEDAM
+ */
 public class M9_fork_join extends RecursiveTask<Integer>{
 
 
@@ -22,6 +32,16 @@ public class M9_fork_join extends RecursiveTask<Integer>{
   
 
         @Override
+        /**
+         * En el compute se hace practicamente todo.
+         * El if sirve para operar con las partes mas pequeñas para comparar dos
+         * numero, mientras que no se haya seaparado en las partes mas pequeñas
+         * se irá dividiendo entre dos con dos forkJoin que pausan los procesos
+         * anteriores y se hace el forkJoin otra vez de los numeros divididos
+         * y asi hasta que puede entrar en el if y va haciendo los Math.max para
+         * devolver el mayor valor de entre los que hay en el array
+         * 
+         */
         protected Integer compute() {
              if (finale - inici <= parabifurcar) {
 
@@ -40,6 +60,18 @@ public class M9_fork_join extends RecursiveTask<Integer>{
     
         
 
+        /**
+         * 
+         * Aqui se declara un arrayList de 20000 que crea numeros al azar del 1 
+         * al 50000 con un bucle for.
+         * 
+         * Despues de eso se crean tantos hilos como queramos o podamos utilizar
+         * y el forkJoin por el que se le pasan el ArrayList, el numero por el que
+         * empieza y el tamaño de este para abarcar todo el array
+         * 
+         * Se llama al resultado con el pool.invoke y se imprimirá
+         * @param args 
+         */
         public static void main(String[] args) {
 
             ArrayList<Integer> sueldos = new ArrayList();
